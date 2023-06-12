@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 const Home = () => {
   const navigation = useNavigation();
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     getVacinas();
@@ -24,7 +24,7 @@ const Home = () => {
     }).catch((error) => {
       console.error('Erro ao obter vacinas:', error);
     });
-  
+    console.log(JSON.stringify(data));
   }
 
   return (
@@ -38,15 +38,17 @@ const Home = () => {
               placeholder="PESQUISAR VACINA..."
             />
           </View>
-          {/* <View style={styles.container.cards}>
+          <View style={styles.container.cards}>
             {data.map((item) => (
+
               <TouchableOpacity
-                onPress={() => navigation.navigate('EditarVacina',  { id: item.id })}
+              key={item.id}
+                onPress={() => navigation.navigate('EditarVacina', { id: item.id })}
               >
-                <CardVacinas key={item.id} vacina={item.vacina} />
+                <CardVacinas vacina={item.nome} />
               </TouchableOpacity>
             ))}
-          </View> */}
+          </View>
         </View>
         <View style={styles.container.btn}>
           <TouchableOpacity
